@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<!-- saved from url=(0039)https://ojijinwang.github.io/index.html -->
+<html lang="en-US"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+<!-- Begin Jekyll SEO tag v2.8.0 -->
+<title>gpd_vcloud | ojijinWang.gpd_vcloud.github.io</title>
+<meta name="generator" content="Jekyll v3.9.5">
+<meta property="og:title" content="gpd_vcloud">
+<meta property="og:locale" content="en_US">
+<link rel="canonical" href="https://ojijinwang.github.io/ojijinWang.gpd_vcloud.github.io/">
+<meta property="og:url" content="https://ojijinwang.github.io/ojijinWang.gpd_vcloud.github.io/">
+<meta property="og:site_name" content="ojijinWang.gpd_vcloud.github.io">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta property="twitter:title" content="gpd_vcloud">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"WebSite","headline":"gpd_vcloud","name":"ojijinWang.gpd_vcloud.github.io","url":"https://ojijinwang.github.io/ojijinWang.gpd_vcloud.github.io/"}</script>
+<!-- End Jekyll SEO tag -->
+
+    <style class="anchorjs"></style><link rel="stylesheet" href="./gpd_vcloud _ ojijinWang.gpd_vcloud.github.io_files/style.css">
+    <!-- start custom head snippets, customize with your own _includes/head-custom.html file -->
+
+<!-- Setup Google Analytics -->
+
+
+
+<!-- You can set your favicon here -->
+<!-- link rel="shortcut icon" type="image/x-icon" href="/ojijinWang.gpd_vcloud.github.io/favicon.ico" -->
+
+<!-- end custom head snippets -->
+
+  </head>
+  <body data-new-gr-c-s-check-loaded="14.1157.0" data-gr-ext-installed="">
+    <div class="container-lg px-3 my-5 markdown-body">
+      
+      <h1><a href="https://ojijinwang.github.io/ojijinWang.gpd_vcloud.github.io/">ojijinWang.gpd_vcloud.github.io</a></h1>
+      
+
+      <h1 id="gpd_vcloud">gpd_vcloud</h1>
+<p>Remove dangerous grasp: VCloud(visible point cloud) filter implemented with “Grasp Pose Detection in Point Clouds”</p>
+
+<ul>
+  <li><a href="https://www.oit.ac.jp/elc/~matsunolab/index.html">Author’s website</a></li>
+  <li><a href="https://ojijinwang.github.io/making">License</a></li>
+</ul>
+
+<p>Since the occlusion of the sensor is considered, we want to remove the partly invisible grasp from the sensor.
+We provide a filter/method that includes incomplete point cloud information.
+The method can be used for many different scenes such as complex backgrounds.</p>
+
+<p><img src="./gpd_vcloud _ ojijinWang.gpd_vcloud.github.io_files/Fig_exp.png" height="170px"></p>
+
+<p>To solve this problem, we introduce a novel technique named <strong>visible point-cloud(V-cloud)</strong> – generated using the point cloud and pose (position and orientation) information of the sensor(s) – that helps to eliminate unsafe grasp candidates quickly and efficiently.</p>
+
+<p><img src="./gpd_vcloud _ ojijinWang.gpd_vcloud.github.io_files/Fig_visible_region_c3.png" height="170px"><img src="./gpd_vcloud _ ojijinWang.gpd_vcloud.github.io_files/Fig_vcloud.png" height="170px"></p>
+
+<p>we also define a value named <strong>visibility</strong> to determine the danger of grasp</p>
+
+<p><img src="./gpd_vcloud _ ojijinWang.gpd_vcloud.github.io_files/Fig_light_cloud_3_c.png" height="170px"></p>
+
+<p>Of course, the same effect can be achieved by using other filters. However, the method is more general and more efficient.</p>
+
+<p>The method is implemented with “Grasp Pose Detection in Point Cloud”</p>
+<ul>
+  <li>A standalone filter can be used as well for any grasp detection method ([making])</li>
+</ul>
+
+<h2 id="1-requirements--installation">1) Requirements &amp; Installation<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#1-requirements--installation" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p>The following instructions have been tested on  <strong>Ubuntu 16.04</strong>, <strong>Ubuntu 18.04</strong>, and  <strong>Ubuntu 20.04</strong>.</p>
+
+<h3 id="1-install-ros-the-ros-installs-the-requirements-for-you">1. Install ROS. The ros installs the requirements for you.<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#1-install-ros-the-ros-installs-the-requirements-for-you" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+<p>[PCL 1.9 or newer]
+  [Eigen 3.0 or newer]
+  [OpenCV 3.3 or newer]</p>
+
+<h3 id="2-install-gpd">2. Install gpd:<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#2-install-gpd" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+<p>Since we use the old version of “Grasp Pose Detection in Point Clouds”. please use the <strong>gpd</strong> uploaded in this resp.</p>
+
+<h4 id="21-install-caffe-cpu-only-it-is-too-troublesome-to-install-gpu-version">2.1. install caffe (CPU only: it is too troublesome to install GPU version)<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#21-install-caffe-cpu-only-it-is-too-troublesome-to-install-gpu-version" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    sudo apt-get install libprotobuf-dev libleveldb-dev libsnappy-dev libopencv-dev libhdf5-serial-dev protobuf-compiler
+    sudo apt-get install --no-install-recommends libboost-all-dev
+    sudo apt-get install libgflags-dev libgoogle-glog-dev liblmdb-dev
+    sudo apt-get install libopenblas-dev liblapack-dev libatlas-base-dev
+
+    mkdir -p ~/software/caffe
+    cd ~/software/caffe
+    git clone https://github.com/BVLC/caffe.git
+</code></pre></div></div>
+
+<p>copy the example CMake config</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    cd caffe
+    cp Makefile.config.example Makefile.config
+</code></pre></div></div>
+
+<p>change CMake config</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    gedit Makefile.config
+</code></pre></div></div>
+<p>from</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    CPU_ONLY := 1
+    OPENCV_VERSION := 3
+    INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include
+    LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib
+</code></pre></div></div>
+<p>to</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    CPU_ONLY := 1
+    OPENCV_VERSION := 3
+    INCLUDE_DIRS := $(PYTHON_INCLUDE) /usr/local/include /usr/include/hdf5/serial
+    LIBRARY_DIRS := $(PYTHON_LIB) /usr/local/lib /usr/lib /usr/lib/x86_64-linux-gnu /usr/lib/x86_64-linux-gnu/hdf5/serial
+</code></pre></div></div>
+<p>beacuse the computing speed mkl &gt; openlas &gt;atlas, and caffe take atlas at default</p>
+
+<p>install to the system</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    mkdir ./build
+    cd ./build
+    cmake ..
+    make all -j16
+    make install -j16
+    make runtest -j16
+</code></pre></div></div>
+
+<h4 id="23-install-gpd">2.3. install gpd<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#23-install-gpd" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h4>
+<p>copy the gpd folder into ~/software</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    mkdir build &amp;&amp; cd build
+    cmake ..
+    make
+    sudo make install
+</code></pre></div></div>
+
+<h3 id="3-build-the-package-in-ros">3. Build the package in ROS<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#3-build-the-package-in-ros" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h3>
+<p>copy the <strong>gpd_vcloud</strong> int ~catkin_ws/src.
+and catkin_make/build</p>
+
+<h2 id="2-how-to-use">2). How to use<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#2-how-to-use" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+<p>you need a realsense camera to obtain the point cloud</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>    roslaunch gpd_vcloud step1_realsense_gets_pointcloud.launch
+</code></pre></div></div>
+<p>the gpd_cloud with active once as long as point cloud exists</p>
+<div class="language-plaintext highlighter-rouge"><div class="highlight"><pre class="highlight"><code>     roslaunch gpd_vcloud step2_gpd_vcloud.launch
+</code></pre></div></div>
+
+<h2 id="3-references">3) References<a class="anchorjs-link " href="https://ojijinwang.github.io/index.html#3-references" aria-label="Anchor" data-anchorjs-icon="" style="font: 1em / 1 anchorjs-icons; padding-left: 0.375em;"></a></h2>
+
+<p>If you like this package and use it in your own work, please cite our journal
+paper. I attach the paper file in the package</p>
+
+<p>Xixun Wang, S. Nisar, F. Matsuno, Robust grasp detection with incomplete point cloud and complex background.</p>
+
+
+      
+    </div>
+    <script src="./gpd_vcloud _ ojijinWang.gpd_vcloud.github.io_files/anchor.min.js.ダウンロード" integrity="sha256-lZaRhKri35AyJSypXXs4o6OPFTbTmUoltBbDCbdzegg=" crossorigin="anonymous"></script>
+    <script>anchors.add();</script>
+  
+
+</body><grammarly-desktop-integration data-grammarly-shadow-root="true"><template shadowrootmode="open"><style>
+      div.grammarly-desktop-integration {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0;
+        -moz-user-select: none;
+        -webkit-user-select: none;
+        -ms-user-select:none;
+        user-select:none;
+      }
+
+      div.grammarly-desktop-integration:before {
+        content: attr(data-content);
+      }
+    </style><div aria-label="grammarly-integration" role="group" tabindex="-1" class="grammarly-desktop-integration" data-content="{&quot;mode&quot;:&quot;full&quot;,&quot;isActive&quot;:true,&quot;isUserDisabled&quot;:false}"></div></template></grammarly-desktop-integration></html>
